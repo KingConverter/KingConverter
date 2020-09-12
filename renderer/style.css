@@ -13,15 +13,13 @@ body,
 
 /* File picker (Main screen) */
 .file-picker {
-  width: 50%;
-  height: 50%;
   font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: aqua;
 }
-
 .file-picker span {
   pointer-events: none;
 }
@@ -29,11 +27,10 @@ body,
 /* Files modal (when some files have been selected) */
 .file-modal {
   display: grid;
-  grid-template-rows: 1fr 40px 40px;
+  grid-template-rows: 1fr 40px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "files files"
-    "dropdown dropdown"
     "addmore convert";
   justify-content: center;
   align-items: center;
@@ -44,21 +41,55 @@ body,
   display: flex;
   flex-direction: column;
   align-self: start;
+  margin-bottom: 50px;
+  color: bisque;
+  font-size: 25px;
+  font-family: "Hind Siliguri", sans-serif;
 }
 
 .add-more-files-btn {
   grid-area: addmore;
+  height: 45px;
+  font-weight: bolder;
 }
 
 .convert-files-btn {
   grid-area: convert;
+  height: 45px;
+  font-weight: bolder;
 }
 
 /* Hide element */
 .hidden {
   display: none;
 }
+body {
+  background-color: #202225;
+}
 
-.dest-format {
-  grid-area: dropdown;
+@import url("https://fonts.googleapis.com/css2?family=Kurale&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap");
+
+h1 {
+  font-family: "Kurale", serif;
+  color: #eaf0f1;
+  font-size: 80px;
+}
+h3 {
+  font-family: "Quicksand", sans-serif;
+  color: #dae0e2;
+  font-size: 20px;
+}
+ol {
+  font-weight: bold;
+  color: #8b78e6;
+}
+.heading {
+  margin-left: 300px;
+  margin-top: 100px;
+  align-items: center;
+}
+.subHeader {
+  margin-left: 300px;
 }
