@@ -9,13 +9,18 @@
 
   <body>
     <div id="file-picker" class="file-picker"><span>Choose a file</span></div>
-    <div>
-      <label for="dest-format-dropdown">Destination Format</label>
-      <select name="dest-format-dropdown" id="dest-format-dropdown" disabled>
-        <option value="" selected disabled hidden>Choose</option>
-      </select>
+    <div id="file-modal" class="file-modal hidden">
+      <div id="selected-files" class="selected-files"></div>
+      <div class="dest-format">
+        <label for="dest-format-dropdown">Destination Format</label>
+        <select name="dest-format-dropdown" id="dest-format-dropdown" disabled>
+          <option value="" selected disabled hidden>Choose</option>
+        </select>
+      </div>
+      <button id="add-more-files-btn" class="add-more-files-btn">Add more files!</button>
+      <button id="convert-files-btn" class="convert-files-btn">Convert files</button>
     </div>
-    <button id="convert-button" disabled>Convert</button>
+
     <script src="renderer/convert.js"></script>
     <script src="renderer/renderer.js"></script>
   </body>

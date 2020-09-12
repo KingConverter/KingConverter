@@ -1,12 +1,10 @@
 var sharp = require("sharp");
 var path = require("path");
 
-const FORMATS = ["png", "jpg", "jpeg", "tiff", "webp"];
+const FORMATS = ["png", "jpg", "jpeg", "tiff", "webp", "bmp"];
 
 var convert = (input_path, destination_format) => {
   var { dir, name } = path.parse(input_path);
-  console.log(dir);
-  console.log(name);
   sharp(input_path).toFile(path.join(dir, name + "." + destination_format));
 };
 
