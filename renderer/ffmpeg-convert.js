@@ -2,8 +2,23 @@ const ffmpegPath = require("ffmpeg-static-electron").path;
 const { spawn } = require("child_process");
 var path = require("path");
 
-// TODO: Need to add the rest of the compatible formats
-const AUDIO_FORMATS = ["mp3", "wav", "ogg", "pcm"];
+const AUDIO_VIDEO_FORMATS = [
+  "pcm",
+  "opus",
+  "wav",
+  "mp3",
+  "ogg",
+  "aac",
+  "aiff",
+  "au",
+  "flac",
+  "mkv",
+  "avi",
+  "mp4",
+  "wmv",
+  "webm",
+  "mov",
+];
 
 function ffmpegAudioConvert(inputPath, destinationFormat) {
   var { dir, name } = path.parse(inputPath);
@@ -12,11 +27,12 @@ function ffmpegAudioConvert(inputPath, destinationFormat) {
   const processAud = spawn(`${ffmpegPath}`, [`-i`, `${inputPath}`, `${des}`]);
   processAud.on("close", code => {
     console.log(`child process exited with code ${code}`);
+    if (code) console.log("ERROR");
   });
 }
 
 const fillAudioOptions = inputFormat => {
-  var filteredFormats = AUDIO_FORMATS.filter(element => !inputFormat.includes(element));
+  var filteredFormats = AUDIO_VIDEO_FORMATS.filter(element => !inputFormat.includes(element));
 
   var length = dropdown.options.length;
   for (i = length - 1; i >= 0; i--) {

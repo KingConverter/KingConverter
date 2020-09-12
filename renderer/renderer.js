@@ -37,7 +37,7 @@ const addFiles = e => {
     filters: [
       { name: "Images", extensions: ["jpg", "png", "jpeg", "webp", "tiff", "bmp"] },
       { name: "Audio", extensions: ["mp3", "wav", "ogg", "pcm"] },
-      { name: "Video", extensions: ["mkv", "avi", "mp4", "wmv", "webm"] },
+      { name: "Video", extensions: ["mkv", "avi", "mp4", "wmv", "webm", "mov"] },
       { name: "All Files", extensions: ["*"] },
     ],
     properties: ["openFile", "multiSelections"],
@@ -50,7 +50,7 @@ const addFiles = e => {
     fillOptions(input_extension.split(".")[1]);
     convertButton.disabled = false;
   } else if (
-    AUDIO_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))
+    AUDIO_VIDEO_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))
   ) {
     fillAudioOptions(input_extension.split(".")[1]);
     convertButton.disabled = false;
@@ -77,9 +77,8 @@ convertButton.addEventListener("click", e => {
   if (!destinationFormat) destinationFormat = destFormatDropdown.options[0].value;
   if (IMAGE_FORMATS.includes(destinationFormat))
     filePaths.forEach(fP => sharpConvert(fP, destinationFormat));
-  if (AUDIO_FORMATS.includes(destinationFormat))
+  if (AUDIO_VIDEO_FORMATS.includes(destinationFormat))
     filePaths.forEach(fP => ffmpegAudioConvert(fP, destinationFormat));
-  // ADD" VIDEO_FROMAT
 });
 
 [filePickerDiv, addMoreBtn].forEach(elem => elem.addEventListener("click", addFiles));

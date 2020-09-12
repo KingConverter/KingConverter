@@ -13,8 +13,8 @@ body,
 
 /* File picker (Main screen) */
 .file-picker {
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   font-size: 2rem;
   display: flex;
   justify-content: center;
