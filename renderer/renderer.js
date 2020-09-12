@@ -75,7 +75,7 @@ const addFiles = e => {
   } else if (
     AUDIO_VIDEO_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))
   ) {
-    fillAudioOptions(input_extension.split(".")[1]);
+    fillFFmpegOptions(input_extension.split(".")[1]);
     convertButton.disabled = false;
   } else if (!selectedFiles || selectedFiles.length === 0) {
     console.log("No files selected.");

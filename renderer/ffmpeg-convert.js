@@ -20,7 +20,7 @@ const AUDIO_VIDEO_FORMATS = [
   "mov",
 ];
 
-function ffmpegAudioConvert(inputPath, destinationFormat) {
+function ffmpegConvert(inputPath, destinationFormat) {
   var { dir, name } = path.parse(inputPath);
   var des = path.join(dir, name + "." + destinationFormat);
   //Spwan Child Process and Notify When Done
@@ -31,7 +31,7 @@ function ffmpegAudioConvert(inputPath, destinationFormat) {
   });
 }
 
-const fillAudioOptions = inputFormat => {
+const fillFFmpegOptions = inputFormat => {
   var filteredFormats = AUDIO_VIDEO_FORMATS.filter(element => !inputFormat.includes(element));
 
   var length = dropdown.options.length;
