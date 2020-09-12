@@ -23,6 +23,9 @@
     "prettier": "2.1.1",
     "pretty-quick": "^3.0.2"
   },
+  "dependencies": {
+    "ffmpeg-static-electron": "^2.0.1"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
