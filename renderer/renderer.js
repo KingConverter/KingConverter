@@ -35,9 +35,32 @@ const addFiles = e => {
   const selectedFiles = dialog.showOpenDialogSync({
     title: "Select files to convert",
     filters: [
-      { name: "Images", extensions: ["jpg", "png", "jpeg", "webp", "tiff", "bmp"] },
-      { name: "Audio", extensions: ["mp3", "pcm", "wav"] },
-      { name: "Video", extensions: ["mkv", "avi", "mp4", "wmv", "webm"] },
+      {
+        name: "Image/Audio/Video",
+        extensions: [
+          "jpg",
+          "png",
+          "jpeg",
+          "webp",
+          "tiff",
+          "bmp",
+          "pcm",
+          "opus",
+          "wav",
+          "mp3",
+          "ogg",
+          "aac",
+          "aiff",
+          "au",
+          "flac",
+          "mkv",
+          "avi",
+          "mp4",
+          "wmv",
+          "webm",
+          "mov",
+        ],
+      },
       { name: "All Files", extensions: ["*"] },
     ],
     properties: ["openFile", "multiSelections"],
@@ -46,9 +69,13 @@ const addFiles = e => {
   var input_extension = getCommonFileExtension(selectedFiles);
   console.log(selectedFiles);
   console.log(input_extension);
-  if (input_extension) {
-    console.log(selectedFiles);
+  if (IMAGE_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))) {
     fillOptions(input_extension.split(".")[1]);
+    convertButton.disabled = false;
+  } else if (
+    AUDIO_VIDEO_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))
+  ) {
+    fillFFmpegOptions(input_extension.split(".")[1]);
     convertButton.disabled = false;
   } else if (!selectedFiles || selectedFiles.length === 0) {
     console.log("No files selected.");
@@ -71,7 +98,10 @@ destFormatDropdown.addEventListener("click", e => {
 convertButton.addEventListener("click", e => {
   // default value
   if (!destinationFormat) destinationFormat = destFormatDropdown.options[0].value;
-  filePaths.forEach(filePath => convert(filePath, destinationFormat));
+  if (IMAGE_FORMATS.includes(destinationFormat))
+    filePaths.forEach(fP => sharpConvert(fP, destinationFormat));
+  if (AUDIO_VIDEO_FORMATS.includes(destinationFormat))
+    filePaths.forEach(fP => ffmpegConvert(fP, destinationFormat));
 });
 
 [filePickerDiv, addMoreBtn].forEach(elem => elem.addEventListener("click", addFiles));
