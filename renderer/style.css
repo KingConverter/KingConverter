@@ -3,16 +3,17 @@
 }
 
 html,
-body {
+body,
+.file-picker,
+.file-modal {
   height: 100%;
   width: 100%;
   margin: 0;
 }
 
+/* File picker (Main screen) */
 .file-picker {
   font-size: 2rem;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,4 +21,36 @@ body {
 }
 .file-picker span {
   pointer-events: none;
+}
+
+/* Files modal (when some files have been selected) */
+.file-modal {
+  display: grid;
+  grid-template-rows: 1fr 40px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "files files"
+    "addmore convert";
+  justify-content: center;
+  align-items: center;
+}
+
+.selected-files {
+  grid-area: files;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+}
+
+.add-more-files-btn {
+  grid-area: addmore;
+}
+
+.convert-files-btn {
+  grid-area: convert;
+}
+
+/* Hide element */
+.hidden {
+  display: none;
 }
