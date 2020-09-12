@@ -1,7 +1,7 @@
 var sharp = require("sharp");
 var path = require("path");
 
-const FORMATS = ["png", "jpg", "jpeg", "tiff", "webp", "bmp"];
+const IMAGE_FORMATS = ["png", "jpg", "jpeg", "tiff", "webp", "bmp"];
 
 var convert = (input_path, destination_format) => {
   var { dir, name } = path.parse(input_path);
@@ -18,7 +18,7 @@ const fillOptions = input_format => {
   // convert to array
   if (!Array.isArray(input_format)) input_format = [input_format];
 
-  var filtered_formats = FORMATS.filter(element => !input_format.includes(element));
+  var filtered_formats = IMAGE_FORMATS.filter(element => !input_format.includes(element));
 
   // Clear all options first
   var length = dropdown.options.length;
