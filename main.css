@@ -1,0 +1,90 @@
+ @import url("https://fonts.googleapis.com/css2?family=Kurale&display=swap");
+ @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+ 
+h1{
+    font-family: 'Kurale', serif;
+    color: #EAF0F1;
+    font-size: 80px;
+    
+}
+h3{
+    font-family: 'Quicksand', sans-serif;
+    color: #DAE0E2;
+    font-size: 20px;
+
+}
+ol{
+    font-weight: bold;
+    color: #8B78E6;
+}
+.heading{
+    
+    margin-left: 300px;
+    margin-top: 100px;
+    align-items: center;
+
+}
+.subHeader{
+    margin-left: 300px;
+    
+}
+body{
+    background-color: #202225;
+}
+#import{
+    width: 75vw;
+    height: 125px;
+    background-color:#EAF0F1;
+    left: 0px;
+    margin-top: 100px;
+    margin-left: 100px;
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    cursor: pointer;
+  }
+
+#files {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }
+ #import .input1{
+    height: 90px;
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-bottom: 10px;
+    margin-right: 109px;
+    background-color: #E8290B;
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
+    text-shadow:#E8290B;
+    border-radius: 10px;
+    
+ }
+
+ input[text]{
+     border-color: #E8290B;
+     border-width: 5px;
+     margin-right: 110px;
+ }
+
+ .input3 #sub-button{
+     width: 200px;
+     height: 90px;
+     margin-top: 10px;
+     margin-left: 145px;
+     margin-bottom: 10px;
+     margin-right: 109px;
+     background-color: #AE1438;
+     text-shadow:#AE1438 ;
+     border-radius: 10px;
+
+
+ }
+
+
