@@ -18,6 +18,14 @@
   },
   "homepage": "https://github.com/radiantly/king-converter#readme",
   "devDependencies": {
-    "electron": "^10.1.1"
+    "electron": "^10.1.1",
+    "husky": "^4.3.0",
+    "prettier": "2.1.1",
+    "pretty-quick": "^3.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
