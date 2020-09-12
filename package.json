@@ -1,0 +1,23 @@
+{
+  "name": "king-converter",
+  "version": "1.0.0",
+  "description": "King converter is a cross platform universal file conversion application.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radiantly/king-converter.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radiantly/king-converter/issues"
+  },
+  "homepage": "https://github.com/radiantly/king-converter#readme",
+  "devDependencies": {
+    "electron": "^10.1.1"
+  }
+}
