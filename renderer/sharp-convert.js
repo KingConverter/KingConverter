@@ -3,7 +3,7 @@ var path = require("path");
 
 const IMAGE_FORMATS = ["png", "jpg", "jpeg", "tiff", "webp", "bmp"];
 
-var convert = (input_path, destination_format) => {
+var sharpConvert = (input_path, destination_format) => {
   var { dir, name } = path.parse(input_path);
   sharp(input_path).toFile(path.join(dir, name + "." + destination_format));
 };
@@ -45,10 +45,4 @@ const getCommonFileExtension = filePaths => {
 
   console.log(ext);
   return ext;
-};
-
-module.exports = {
-  convert,
-  fillOptions,
-  getCommonFileExtension,
 };
