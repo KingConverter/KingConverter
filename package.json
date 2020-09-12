@@ -24,11 +24,12 @@
     "pretty-quick": "^3.0.2"
   },
   "dependencies": {
-    "ffmpeg-static-electron": "^2.0.1"
+    "ffmpeg-static-electron": "^2.0.1",
+    "sharp": "^0.26.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "./node_modules/.bin/pretty-quick --staged"
     }
   }
 }
