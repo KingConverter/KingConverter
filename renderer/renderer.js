@@ -35,9 +35,32 @@ const addFiles = e => {
   const selectedFiles = dialog.showOpenDialogSync({
     title: "Select files to convert",
     filters: [
-      { name: "Images", extensions: ["jpg", "png", "jpeg", "webp", "tiff", "bmp"] },
-      { name: "Audio", extensions: ["mp3", "wav", "ogg", "pcm"] },
-      { name: "Video", extensions: ["mkv", "avi", "mp4", "wmv", "webm", "mov"] },
+      {
+        name: "Image/Audio/Video",
+        extensions: [
+          "jpg",
+          "png",
+          "jpeg",
+          "webp",
+          "tiff",
+          "bmp",
+          "pcm",
+          "opus",
+          "wav",
+          "mp3",
+          "ogg",
+          "aac",
+          "aiff",
+          "au",
+          "flac",
+          "mkv",
+          "avi",
+          "mp4",
+          "wmv",
+          "webm",
+          "mov",
+        ],
+      },
       { name: "All Files", extensions: ["*"] },
     ],
     properties: ["openFile", "multiSelections"],
@@ -78,7 +101,7 @@ convertButton.addEventListener("click", e => {
   if (IMAGE_FORMATS.includes(destinationFormat))
     filePaths.forEach(fP => sharpConvert(fP, destinationFormat));
   if (AUDIO_VIDEO_FORMATS.includes(destinationFormat))
-    filePaths.forEach(fP => ffmpegAudioConvert(fP, destinationFormat));
+    filePaths.forEach(fP => ffmpegConvert(fP, destinationFormat));
 });
 
 [filePickerDiv, addMoreBtn].forEach(elem => elem.addEventListener("click", addFiles));
