@@ -6,22 +6,28 @@
     <title>King Converter</title>
     <link rel="stylesheet" href="renderer/style.css" />
   </head>
-
   <body>
+    <div id="TotalInfo">
+      <div class="heading">
+      
+        <h1>how KC works...</h1><br><br>
+      </div>
+      <div class="subHeader">
+
+      <ol>
+        <li><h3>Choose as many files as required.</h3></li>
+        <li><h3>Choose the required file format from the dropdown.</h3></li>
+        <li><h3>Wait for a while...</h3></li>
+        <li><h3>Download using the button.</h3></li>
+      </ol>
+    </div>
+    <br><br><br>
     <div id="file-picker" class="file-picker"><span>Choose a file</span></div>
     <div id="file-modal" class="file-modal hidden">
       <div id="selected-files" class="selected-files"></div>
-      <div class="dest-format">
-        <label for="dest-format-dropdown">Destination Format</label>
-        <select name="dest-format-dropdown" id="dest-format-dropdown" disabled>
-          <option value="" selected disabled hidden>Choose</option>
-        </select>
-      </div>
       <button id="add-more-files-btn" class="add-more-files-btn">Add more files!</button>
       <button id="convert-files-btn" class="convert-files-btn">Convert files</button>
     </div>
-
-    <script src="renderer/sharp-convert.js"></script>
     <script src="renderer/renderer.js"></script>
   </body>
 </html>
