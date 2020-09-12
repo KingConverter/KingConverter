@@ -6,8 +6,17 @@
     <title>King Converter</title>
     <link rel="stylesheet" href="renderer/style.css" />
   </head>
+
   <body>
     <div id="file-picker" class="file-picker"><span>Choose a file</span></div>
+    <div>
+      <label for="dest-format-dropdown">Destination Format</label>
+      <select name="dest-format-dropdown" id="dest-format-dropdown" disabled>
+        <option value="" selected disabled hidden>Choose</option>
+      </select>
+    </div>
+    <button id="convert-button" disabled>Convert</button>
+    <script src="renderer/convert.js"></script>
     <script src="renderer/renderer.js"></script>
   </body>
 </html>
