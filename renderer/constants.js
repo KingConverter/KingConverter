@@ -1,0 +1,43 @@
+var ALL_FORMATS = [
+  "jpg",
+  "png",
+  "jpeg",
+  "webp",
+  "tiff",
+  "bmp",
+  "pcm",
+  "opus",
+  "wav",
+  "mp3",
+  "ogg",
+  "aac",
+  "aiff",
+  "au",
+  "flac",
+  "mkv",
+  "avi",
+  "mp4",
+  "wmv",
+  "webm",
+  "mov",
+];
+
+var AUDIO_VIDEO_FORMATS = [
+  "pcm",
+  "opus",
+  "wav",
+  "mp3",
+  "ogg",
+  "aac",
+  "aiff",
+  "au",
+  "flac",
+  "mkv",
+  "avi",
+  "mp4",
+  "wmv",
+  "webm",
+  "mov",
+];
+
+var IMAGE_FORMATS = ["png", "jpg", "jpeg", "tiff", "webp", "bmp"];
