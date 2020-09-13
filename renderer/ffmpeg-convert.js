@@ -1,6 +1,12 @@
-const ffmpegPath = require("ffmpeg-static-electron").path;
+var os = require("os");
+var path = require("path");
+var ffmpegPath = require("ffmpeg-static-electron");
 const { spawn } = require("child_process");
 var path = require("path");
+
+if (os.platform() == "win" || os.platform() == "win32") {
+  ffmpegPath = require("ffmpeg-static-electron").path.replace("app.asar", "app.asar.unpacked");
+}
 
 function ffmpegConvert(inputPath, destinationFormat, outputFormat) {
   var { name } = path.parse(inputPath);
