@@ -1,4 +1,10 @@
-# King converter
+# 👑 King Converter
+
+![KingConverterDemo](./assets/img/KingConverterDemo.gif)
+
+## Demo Video for FOSS Hack 2020
+
+[Watch on YouTube](https://youtu.be/rSDrg_mqwSE)
 
 ## Inspiration
 
