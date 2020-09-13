@@ -1,33 +1,29 @@
 const { dialog } = require("electron").remote;
 
-const [convertButton, destFormatDropdown] = ["convert-files-btn", "dest-format-dropdown"].map(id =>
-  document.getElementById(id)
-);
-
-var destinationFormat;
-
-// Get elements by id
-const [filePickerDiv, filesModal, selectedFilesDiv, addMoreBtn] = [
-  "file-picker",
-  "file-modal",
-  "selected-files",
-  "add-more-files-btn",
-].map(id => document.getElementById(id));
-
+var destinationFormat, outputDirectory;
 const filePaths = new Set();
 
+const toggleVisibility = elementId => {
+  document.getElementById(elementId).hidden = !document.getElementById(elementId).hidden;
+};
+
+const createFileListItem = (filePath, index) =>
+  `<li id="file-list-item-${index}" filepath="${filePath}"><span id="filename-${index}" filepath="${filePath}">${path.basename(
+    filePath
+  )}</span><span style="float: right;"><img src="assets/img/cancel.png" id="cancel-button-${index}"></span></li>`;
+
 const showFiles = () => {
-  if (!filePaths) {
-    filePickerDiv.classList.remove("hidden");
-    filesModal.classList.add("hidden");
-    return;
-  }
+  selectedFilesList.innerHTML = [...filePaths]
+    .map((filePath, index) => createFileListItem(filePath, index))
+    .join("");
 
-  // Add file paths to the selected file div
-  selectedFilesDiv.innerHTML = [...filePaths].map(path => `<div>${path}</div>`).join("");
+  Array.prototype.forEach.call(document.querySelectorAll("[id^=cancel-button]"), element => {
+    element.addEventListener("click", removeFileOnClick(element));
+  });
 
-  filesModal.do = filePickerDiv.classList.add("hidden");
-  filesModal.classList.remove("hidden");
+  Array.prototype.forEach.call(document.querySelectorAll("[id^=filename]"), element => {
+    element.addEventListener("click", previewImageOnClick(element));
+  });
 };
 
 const addFiles = e => {
@@ -37,71 +33,126 @@ const addFiles = e => {
     filters: [
       {
         name: "Image/Audio/Video",
-        extensions: [
-          "jpg",
-          "png",
-          "jpeg",
-          "webp",
-          "tiff",
-          "bmp",
-          "pcm",
-          "opus",
-          "wav",
-          "mp3",
-          "ogg",
-          "aac",
-          "aiff",
-          "au",
-          "flac",
-          "mkv",
-          "avi",
-          "mp4",
-          "wmv",
-          "webm",
-          "mov",
-        ],
+        extensions: ALL_FORMATS,
       },
       { name: "All Files", extensions: ["*"] },
     ],
     properties: ["openFile", "multiSelections"],
   });
 
-  var input_extension = getCommonFileExtension(selectedFiles);
-  console.log(selectedFiles);
-  console.log(input_extension);
-  if (IMAGE_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))) {
-    fillOptions(input_extension.split(".")[1]);
-    convertButton.disabled = false;
-  } else if (
-    AUDIO_VIDEO_FORMATS.includes(input_extension.toLowerCase().slice(1, input_extension.length))
-  ) {
-    fillFFmpegOptions(input_extension.split(".")[1]);
-    convertButton.disabled = false;
-  } else if (!selectedFiles || selectedFiles.length === 0) {
+  if (!selectedFiles || selectedFiles.length === 0) {
     console.log("No files selected.");
     return;
-  } else if (!input_extension) {
-    // all extensions are not the same
-    // TODO: Show error to user with message:
-    // "Please add files with same format"
   }
 
-  console.log(selectedFiles);
+  var input_extension = getCommonFileExtension([...filePaths, ...selectedFiles]);
+
+  if (!input_extension) {
+    alert("Error: Please upload files of same format");
+    return;
+  } else if (IMAGE_FORMATS.includes(input_extension)) {
+    fillSharpOptions(input_extension);
+    destFormatDropdown.disabled = false;
+    chooseDirectoryBtn.disabled = false;
+  } else if (AUDIO_VIDEO_FORMATS.includes(input_extension)) {
+    fillFFmpegOptions(input_extension);
+    destFormatDropdown.disabled = false;
+    chooseDirectoryBtn.disabled = false;
+  }
+
   selectedFiles.forEach(filePath => filePaths.add(filePath));
   showFiles();
+
+  // TRANSITION - 1
+  toggleVisibility("screen-1");
+  toggleVisibility("screen-2");
 };
+
+const convertButtonOnClick = e => {
+  // default value
+  if (!destinationFormat) destinationFormat = destFormatDropdown.options[0].value;
+
+  try {
+    if (IMAGE_FORMATS.includes(destinationFormat))
+      filePaths.forEach(filepath => sharpConvert(filepath, destinationFormat, outputDirectory));
+    else if (AUDIO_VIDEO_FORMATS.includes(destinationFormat))
+      filePaths.forEach(filepath => ffmpegConvert(filepath, destinationFormat, outputDirectory));
+  } catch (error) {
+    alert(error);
+  }
+
+  // Open the output directory
+  openDirectory(outputDirectory);
+
+  // TRANSITION - 2
+  toggleVisibility("screen-2");
+  toggleVisibility("screen-3");
+};
+
+const removeFileOnClick = element => e => {
+  filepath = $(`#${element.id}`).closest("li")[0].getAttribute("filepath");
+  filePaths.delete(filepath);
+  $(`#${element.id}`).closest("li").remove();
+  $("#image-preview").removeAttr("src");
+};
+
+const previewImageOnClick = element => e => {
+  filepath = element.getAttribute("filepath");
+  $("#image-preview")[0].src = filepath;
+
+  // remove all active classes
+  $("[id^=file-list-item]").removeClass("active");
+  // add the active class to the current element
+  $(`#${element.id}`).closest("[id^=file-list-item]").addClass("active");
+};
+
+const [
+  convertButton,
+  destFormatDropdown,
+  filePickerDiv,
+  selectedFilesList,
+  addMoreBtn,
+  chooseDirectoryBtn,
+  convertAgainBtn,
+] = [
+  "convert-files-btn",
+  "dest-format-dropdown",
+  "file-picker",
+  "selected-files",
+  "add-more-files-btn",
+  "choose-directory-btn",
+  "convert-again",
+].map(id => document.getElementById(id));
+
+[filePickerDiv, addMoreBtn].forEach(elem => elem.addEventListener("click", addFiles));
+
+chooseDirectoryBtn.addEventListener("click", e => {
+  outputDirectory = dialog.showOpenDialogSync({
+    title: "Choose output directory",
+    properties: ["openDirectory", "createDirectory"],
+  })[0];
+
+  $("#chosen-directory").text(outputDirectory);
+
+  if (outputDirectory) {
+    convertButton.disabled = false;
+  } else {
+    alert("Error: Please choose output directory");
+  }
+});
 
 destFormatDropdown.addEventListener("click", e => {
   destinationFormat = destFormatDropdown.options[destFormatDropdown.selectedIndex].value;
 });
 
-convertButton.addEventListener("click", e => {
-  // default value
-  if (!destinationFormat) destinationFormat = destFormatDropdown.options[0].value;
-  if (IMAGE_FORMATS.includes(destinationFormat))
-    filePaths.forEach(fP => sharpConvert(fP, destinationFormat));
-  if (AUDIO_VIDEO_FORMATS.includes(destinationFormat))
-    filePaths.forEach(fP => ffmpegConvert(fP, destinationFormat));
-});
+convertButton.addEventListener("click", convertButtonOnClick);
 
-[filePickerDiv, addMoreBtn].forEach(elem => elem.addEventListener("click", addFiles));
+convertAgainBtn.addEventListener("click", () => {
+  // reset the state
+  filePaths.clear();
+  destinationFormat = null;
+  outputDirectory = null;
+
+  toggleVisibility("screen-3");
+  toggleVisibility("screen-1");
+});

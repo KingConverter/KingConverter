@@ -1,0 +1,94 @@
+#screen-1 {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+  border: 2px black solid;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+#screen-2 {
+  align-items: center;
+  border: 2px black solid;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+#files-list {
+  width: 60%;
+  height: 10rem;
+  overflow-y: scroll;
+  margin: 1rem;
+  padding-right: 0.5rem;
+  scroll-behavior: auto;
+}
+
+#content-preview {
+  width: 40%;
+  height: 10rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#content-preview #image-preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#screen-3 {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+  border: 2px black solid;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+  background-image: url(https://media.giphy.com/media/5T06ftQWtCMy0XFaaI/giphy.gif);
+}
+
+.dropdown-menu {
+  width: 60px !important;
+}
+
+[id^="cancel-button"] {
+  height: 13px;
+  opacity: 0.3;
+  margin-right: 0.1rem;
+}
+
+[id^="cancel-button"]:hover {
+  opacity: 1;
+}
+
+#selected-files {
+  padding: 0;
+}
+
+#selected-files li {
+  list-style-type: none;
+  padding: 0.2rem;
+  color: black;
+  /* background-color: black; */
+}
+
+#selected-files [id^="filename"] {
+  cursor: pointer;
+}
+
+#selected-files li:hover {
+  background-color: lightgray;
+}
+
+#selected-files li.active {
+  background-color: lightgray;
+}
+
+.screen {
+  height: 26rem;
+}
