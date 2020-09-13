@@ -14,7 +14,7 @@ Download the application from [here](https://github.com/KingConverter/KingConver
 
 3. Choose your desired destination format and also the directory in which you want the converted files to end up.
 
-![Screen-2](./assets/img/usage/second_screen.png)
+![Screen-2](./assets/img/usage/second_screen_1.png)
 
 4. That's it! King Converter will now open up your output directory so that you don't have to go looking for your converted files.
 
