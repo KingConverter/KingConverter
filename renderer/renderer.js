@@ -3,9 +3,7 @@ const { dialog } = require("electron").remote;
 var destinationFormat, outputDirectory;
 const filePaths = new Set();
 
-const toggleVisibility = elementId => {
-  document.getElementById(elementId).hidden = !document.getElementById(elementId).hidden;
-};
+const changeVisibility = (elementId, bool) => (document.getElementById(elementId).hidden = bool);
 
 const createFileListItem = (filePath, index) =>
   `<li id="file-list-item-${index}" filepath="${filePath}"><span id="filename-${index}" filepath="${filePath}">${path.basename(
@@ -24,6 +22,30 @@ const showFiles = () => {
   Array.prototype.forEach.call(document.querySelectorAll("[id^=filename]"), element => {
     element.addEventListener("click", previewImageOnClick(element));
   });
+};
+
+const processAddedFiles = selectedFiles => {
+  const input_extension = getCommonFileExtension([...filePaths, ...selectedFiles]);
+  console.log(input_extension);
+  if (!input_extension) {
+    alert("Error: Please upload files of same format");
+    return;
+  } else if (IMAGE_FORMATS.includes(input_extension)) {
+    fillSharpOptions(input_extension);
+    destFormatDropdown.disabled = false;
+    chooseDirectoryBtn.disabled = false;
+  } else if (AUDIO_VIDEO_FORMATS.includes(input_extension)) {
+    fillFFmpegOptions(input_extension);
+    destFormatDropdown.disabled = false;
+    chooseDirectoryBtn.disabled = false;
+  }
+
+  selectedFiles.forEach(filePath => filePaths.add(filePath));
+  showFiles();
+
+  // TRANSITION - 1
+  changeVisibility("screen-1", true);
+  changeVisibility("screen-2", false);
 };
 
 const addFiles = e => {
@@ -45,27 +67,7 @@ const addFiles = e => {
     return;
   }
 
-  var input_extension = getCommonFileExtension([...filePaths, ...selectedFiles]);
-
-  if (!input_extension) {
-    alert("Error: Please upload files of same format");
-    return;
-  } else if (IMAGE_FORMATS.includes(input_extension)) {
-    fillSharpOptions(input_extension);
-    destFormatDropdown.disabled = false;
-    chooseDirectoryBtn.disabled = false;
-  } else if (AUDIO_VIDEO_FORMATS.includes(input_extension)) {
-    fillFFmpegOptions(input_extension);
-    destFormatDropdown.disabled = false;
-    chooseDirectoryBtn.disabled = false;
-  }
-
-  selectedFiles.forEach(filePath => filePaths.add(filePath));
-  showFiles();
-
-  // TRANSITION - 1
-  toggleVisibility("screen-1");
-  toggleVisibility("screen-2");
+  processAddedFiles(selectedFiles);
 };
 
 const convertButtonOnClick = e => {
@@ -85,8 +87,8 @@ const convertButtonOnClick = e => {
   openDirectory(outputDirectory);
 
   // TRANSITION - 2
-  toggleVisibility("screen-2");
-  toggleVisibility("screen-3");
+  changeVisibility("screen-2", true);
+  changeVisibility("screen-3", false);
 };
 
 const removeFileOnClick = element => e => {
@@ -124,6 +126,19 @@ const [
   "convert-again",
 ].map(id => document.getElementById(id));
 
+document.addEventListener("drop", event => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (event.dataTransfer.files)
+    processAddedFiles(Array.from(event.dataTransfer.files).map(f => f.path));
+});
+
+document.addEventListener("dragover", e => {
+  e.preventDefault();
+  e.stopPropagation();
+});
+
 [filePickerDiv, addMoreBtn].forEach(elem => elem.addEventListener("click", addFiles));
 
 chooseDirectoryBtn.addEventListener("click", e => {
@@ -155,6 +170,6 @@ convertAgainBtn.addEventListener("click", () => {
   $("#image-preview").removeAttr("src");
   $("#chosen-directory").text("");
 
-  toggleVisibility("screen-3");
-  toggleVisibility("screen-1");
+  changeVisibility("screen-3", true);
+  changeVisibility("screen-1", false);
 });
