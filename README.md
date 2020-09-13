@@ -34,6 +34,10 @@ npm install
 npm start
 ```
 
+## Usage
+
+Our usage guide can be found [here](./USAGE.md).
+
 ## Dependencies
 
 We have used the following npm packages:
@@ -41,7 +45,7 @@ We have used the following npm packages:
 - For image conversion: [sharp](https://www.npmjs.com/package/sharp)
 - For audio/video conversion: [ffmpeg-static-electron](https://www.npmjs.com/package/ffmpeg-static-electron)
 
-## Built by
+## Contributors
 
 - [Joshua T.](https://github.com/radiantly)
 - [Rohit Sanjay](https://github.com/rohitsanj)
