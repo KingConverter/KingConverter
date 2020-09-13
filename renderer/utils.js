@@ -1,5 +1,3 @@
-const { exec } = require("child_process");
-
 const openDirectory = dirPath => {
   let command;
   if (process.platform === "darwin") command = `open -R ${dirPath}`;
