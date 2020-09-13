@@ -152,6 +152,8 @@ convertAgainBtn.addEventListener("click", () => {
   filePaths.clear();
   destinationFormat = null;
   outputDirectory = null;
+  $("#image-preview").removeAttr("src");
+  $("#chosen-directory").text("");
 
   toggleVisibility("screen-3");
   toggleVisibility("screen-1");
