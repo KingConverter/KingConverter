@@ -1,26 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>King Converter</title>
-    <link rel="stylesheet" href="renderer/style.css" />
+    <meta name="description" content="Lorem Ipsum Bla bla bla" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    />
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
   </head>
 
-  <body>
-    <div id="file-picker" class="file-picker"><span>Choose a file</span></div>
-    <div id="file-modal" class="file-modal hidden">
-      <div id="selected-files" class="selected-files"></div>
-      <div class="dest-format">
-        <label for="dest-format-dropdown">Destination Format</label>
-        <select name="dest-format-dropdown" id="dest-format-dropdown" disabled>
-          <option value="" selected disabled hidden>Choose</option>
-        </select>
+  <body id="page-top">
+    <div id="wrapper">
+      <!-- Sidebar starts here -->
+      <nav
+        class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+      >
+        <div class="container-fluid d-flex flex-column p-0">
+          <a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+            href="#"
+          >
+            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+            <div class="sidebar-brand-text mx-3"><span>King Converter</span></div>
+          </a>
+          <hr class="sidebar-divider my-0" />
+          <div class="text-center d-none d-md-inline"></div>
+        </div>
+      </nav>
+      <!-- Sidebar ends here -->
+
+      <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+          <div id="screen-1" class="screen">
+            <img
+              src="assets/img/upload_high_res.png"
+              style="justify-self: center; width: 3rem; margin-bottom: 1rem"
+            />
+            <h3 class="text-dark mb-1" style="text-align: center">Drop your files here</h3>
+            <button id="file-picker" class="btn btn-primary">Choose files</button>
+            <div></div>
+          </div>
+          <div id="screen-2" class="screen" hidden>
+            <div id="files-section" style="display: flex">
+              <div id="files-list">
+                <!-- <div class="progress" style="margin-top: 2rem;">
+                                <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 50%;">50%</div>
+                            </div> -->
+                <ul id="selected-files"></ul>
+              </div>
+              <div id="content-preview">
+                <img id="image-preview" src="" alt="" />
+              </div>
+            </div>
+            <div>
+              <div id="options" style="margin-bottom: 2rem">
+                <div class="m-2">
+                  <label for="dest-format-dropdown" style="font-weight: bold">
+                    Choose destination format &nbsp;
+                  </label>
+                  <select name="dest-format-dropdown" id="dest-format-dropdown" disabled>
+                    <option value="" selected disabled hidden>Choose</option>
+                  </select>
+                </div>
+                <div class="m-2 d-flex">
+                  <p class="mb-1 mr-2" style="font-weight: bold">Choose output directory</p>
+                  <button id="choose-directory-btn" class="btn btn-outline-primary btn-sm" disabled>
+                    Browse directory
+                  </button>
+                </div>
+                <span id="chosen-directory" class="ml-2"></span>
+              </div>
+            </div>
+            <button
+              id="add-more-files-btn"
+              class="btn btn-primary"
+              style="width: 10rem; /*margin: 0px;*/ margin-right: 1rem"
+            >
+              Add more files
+            </button>
+            <button id="convert-files-btn" class="btn btn-primary" style="width: 10rem" disabled>
+              Convert
+            </button>
+            <!-- <div class="progress" style="margin-top: 2rem;">
+                        <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                            style="width: 50%;">50%</div>
+                    </div> -->
+          </div>
+          <div id="screen-3" class="screen" hidden>
+            <h3
+              class="text-dark mb-1"
+              style="text-align: center; /*display: block;*/ font-size: 50px; /*margin: 1rem;*/"
+            >
+              Success!
+            </h3>
+            <button id="convert-again" class="btn btn-primary">Convert again</button>
+            <div></div>
+          </div>
+        </div>
+        <!-- Footer  -->
+        <footer class="bg-white sticky-footer">
+          <div class="container my-auto">
+            <div class="text-center my-auto copyright">
+              <span>Copyright © King Converter 2020</span>
+            </div>
+          </div>
+        </footer>
       </div>
-      <button id="add-more-files-btn" class="add-more-files-btn">Add more files!</button>
-      <button id="convert-files-btn" class="convert-files-btn">Convert files</button>
     </div>
 
+    <!-- Bootstrap, Jquery and Others -->
+    <script>
+      if (typeof module === "object") {
+        window.module = module;
+        module = undefined;
+      }
+    </script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script>
+      if (window.module) module = window.module;
+    </script>
+
+    <!-- King Converter Scripts -->
+    <script src="renderer/constants.js"></script>
+    <script src="renderer/utils.js"></script>
     <script src="renderer/sharp-convert.js"></script>
     <script src="renderer/ffmpeg-convert.js"></script>
     <script src="renderer/renderer.js"></script>
