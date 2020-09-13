@@ -10,7 +10,7 @@
 
 Let's face it. We've always been at a point in life where we needed it to convert one format to another. Maybe an online application only accepted `.jpeg` image format, and you had a `.webp` file.
 
-For us techies, it might not seem like a big deal. Maybe it's just a google search away for the required commandline options for ffmpeg. But when you switch to Windows, disaster strikes again. There's no good universal, open-source, GUI file converter that you can use. And you certainly don't want to upload your precious data to some random converter site.
+For developers, it might not seem like a big deal. Maybe it's just a google search away for the required commandline options for ffmpeg. But when you switch to Windows, disaster strikes again. There's no good universal, open-source, GUI file converter that you can use. And you certainly don't want to upload your precious data to some random converter site.
 
 That's why we decided to make a cross-platform electron app that serves as a beautiful GUI frontend to the ffmpeg and sharp libraries.
 
