@@ -1,6 +1,4 @@
-const { dialog } = require("electron").remote;
-
-var destinationFormat, outputDirectory;
+let destinationFormat, outputDirectory;
 const filePaths = new Set();
 
 const changeVisibility = (elementId, bool) => (document.getElementById(elementId).hidden = bool);
