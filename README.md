@@ -12,6 +12,10 @@ That's why we decided to make a cross-platform electron app that serves as a bea
 
 King converter aims to be the one stop app that can convert one format to another, whether it be an image, audio or video file. This app tries to keep the conversion process as simple as possible with the clean and simple GUI.
 
+## Download Executable
+
+- [Download for Windows](https://github.com/KingConverter/KingConverter/releases/download/latest/king-converter.1.0.0.exe)
+
 ## Build from source
 
 To build from source, you will need Node v12+ and npm.
@@ -24,9 +28,20 @@ npm install
 npm start
 ```
 
+## Dependencies
+
+We have used the following npm packages:
+
+- For image conversion: [sharp](https://www.npmjs.com/package/sharp)
+- For audio/video conversion: [ffmpeg-static-electron](https://www.npmjs.com/package/ffmpeg-static-electron)
+
 ## Built by
 
 - [Joshua T.](https://github.com/radiantly)
 - [Rohit Sanjay](https://github.com/rohitsanj)
 - [Sahaj Kedia](https://github.com/sahajkedia)
 - [Sravanth C.](https://github.com/sravanth-chebrolu)
+
+## License
+
+[MIT License](https://github.com/KingConverter/KingConverter/blob/master/LICENSE)
